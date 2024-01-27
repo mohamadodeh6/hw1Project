@@ -109,6 +109,8 @@ public class Main {
             }
 
         }
+        System.out.println("Dear president, please enter the cell’s indexes.");
+
         return i;
         //*******//
     }
