@@ -3,11 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    //hello my friend this is a test for gitHub
-    //hello my friend this is a test for gitHub
-    //hello my friend this is a test for gitHub
     public static Scanner scanner;  // Note: Do not change this line.
-//*************//////////
     /**
      * Scans the number of games, than plays the student game the specified amount of times.
      *
@@ -27,7 +23,8 @@ public class Main {
         }
         System.out.print("All games have ended.");
     }
-
+    /* returns the number of Takeen students
+    * */
     public static int countX(char[][] board, int rows, int columns){
         int count = 0;
         for (int i = 0; i < rows; i++) {
@@ -81,6 +78,8 @@ public class Main {
             System.out.println();
         }
     }
+    /* initiates the first board
+    * */
     public static void initBoard(char[][] board, int rows, int cols){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -89,6 +88,8 @@ public class Main {
         }
     }
     //**********//
+    /* gets the Takeen indexes and fills the first board
+    * */
     public static int initBoardIndexes(char[][] board, int row_max, int col_max){
         int rows, cols, i = 0;
         while(true){
@@ -118,6 +119,8 @@ public class Main {
         return i;
         //*******//
     }
+    /* displays the current board
+    * */
     public static void printBoard(char[][] board, int rows, int columns){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -126,6 +129,9 @@ public class Main {
             System.out.println();
         }
     }
+    /* creates the next board based on the previous one
+    according to the Takeen method's conditions
+    * */
     public static void updateBoard(char[][] prevBoard, char[][] currentBoard, int rows, int columns){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -138,6 +144,8 @@ public class Main {
         }
 
     }
+    /* saves the history of boards during the whole game
+    * */
     public static void saveGame(int[][][] semBox, char[][] board, int semNumber, int rows, int cols){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -145,6 +153,9 @@ public class Main {
             }
         }
     }
+    /* returns whether the student remains Takeen
+    according to the game rules
+    * */
     public static boolean Takeen(char[][] board, int maxRows, int maxCols, int row, int col){
         boolean takeen = false;
         int startRow = Math.max(0, row - 1);
@@ -169,6 +180,8 @@ public class Main {
         }
         return takeen;
     }
+    /* copies the current board to the previous one
+    * */
     public static void switchBoard(char[][] prevBoard, char[][] currentBoard, int rows, int columns){
         for (int i = 0; i < rows; i++) {
             if (columns >= 0) System.arraycopy(currentBoard[i], 0, prevBoard[i], 0, columns);
