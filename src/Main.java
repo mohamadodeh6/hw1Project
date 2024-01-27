@@ -51,11 +51,13 @@ public class Main {
         String[] dimensions = input.split(" X ");
         int rows = Integer.parseInt(dimensions[0]);
         int cols = Integer.parseInt(dimensions[1]);
+        semestersBox = new int[maxSemesters][rows][cols];
         prevBoard = new char[rows][cols];
         initBoard(prevBoard, rows, cols);
         currentBoard = new char[rows][cols];
         prevTakeen = initBoardIndexes(prevBoard, rows, cols);
-        for (int i = 0; i <= maxSemesters; i++) {
+        int i;
+        for (i = 0; i <= maxSemesters; i++) {
             if (prevTakeen == currentTakeen){
                 System.out.println("The students have stabilized.");
                 break;
@@ -71,6 +73,7 @@ public class Main {
             System.out.println("Semester number " + (i+1) + ":");
             printBoard(prevBoard, rows, cols);
             updateBoard(prevBoard, currentBoard, rows, cols);
+            saveGame(semestersBox, prevBoard, i, rows, cols);
             prevTakeen = countX(prevBoard, rows, cols);
             currentTakeen = countX(currentBoard, rows, cols);
             switchBoard(prevBoard, currentBoard, rows,cols);
@@ -134,6 +137,13 @@ public class Main {
             }
         }
 
+    }
+    public static void saveGame(int[][][] semBox, char[][] board, int semNumber, int rows, int cols){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                 semBox[semNumber][i][j] = board[i][j];
+            }
+        }
     }
     public static boolean Takeen(char[][] board, int maxRows, int maxCols, int row, int col){
         boolean takeen = false;
