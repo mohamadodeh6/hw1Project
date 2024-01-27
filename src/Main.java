@@ -3,8 +3,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+    //this is a test for gitHub
     public static Scanner scanner;  // Note: Do not change this line.
-
+//*************//////////
     /**
      * Scans the number of games, than plays the student game the specified amount of times.
      *
@@ -54,7 +55,7 @@ public class Main {
 
 
     }
-    //**************************//
+    //**********//
     public static int initBoardIndexes(char[][] board, int row_max, int col_max){
         int rows = 0, cols = 0, i = 0;
         while(true){
@@ -81,7 +82,7 @@ public class Main {
 
         }
         return i;
-        //*******************//
+        //*******//
     }
     public static int countX(int[][] board, int rows, int columns){
         int count = 0;
