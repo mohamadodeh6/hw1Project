@@ -3,9 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    //this is a test for gitHub
-    //this is a test for gitHub
-    //this is a test for gitHub
+    //hello my friend this is a test for github
     public static Scanner scanner;  // Note: Do not change this line.
 //*************//////////
     /**
