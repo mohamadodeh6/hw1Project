@@ -20,7 +20,6 @@ public class Main {
         for (int i = 1; i <= numberOfGames; i++) {
             System.out.println("Game number " + i + " starts.");
             theStudentsGame();
-            System.out.println("dddddddddddddddddddddddddddddddddddddddddddddddddddddd");
             System.out.println("Game number " + i + " ended.");
             System.out.println("-----------------------------------------------");
         }
@@ -55,17 +54,26 @@ public class Main {
         initBoard(prevBoard, rows, cols);
         currentBoard = new char[rows][cols];
         prevTakeen = initBoardIndexes(prevBoard, rows, cols);
-        for (int i = 1; i <= maxSemesters; i++) {
-            if (prevTakeen == currentTakeen || currentTakeen == 0){
+        for (int i = 0; i <= maxSemesters; i++) {
+            if (prevTakeen == currentTakeen){
+                System.out.println("The students have stabilized.");
                 break;
             }
-            System.out.println("Semester number " + i + ":");
+            if (currentTakeen == 0){
+                System.out.println("There are no more students.");
+                break;
+            }
+            if (i == maxSemesters){
+                System.out.println("The semesters limitation is over.");
+                break;
+            }
+            System.out.println("Semester number " + (i+1) + ":");
             printBoard(prevBoard, rows, cols);
             updateBoard(prevBoard, currentBoard, rows, cols);
             prevTakeen = countX(prevBoard, rows, cols);
             currentTakeen = countX(currentBoard, rows, cols);
             switchBoard(prevBoard, currentBoard, rows,cols);
-            System.out.println("Number of students: " + currentTakeen);
+            System.out.println("Number of students: " + prevTakeen);
             System.out.println();
         }
     }
