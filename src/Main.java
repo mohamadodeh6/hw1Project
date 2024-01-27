@@ -23,7 +23,7 @@ public class Main {
             System.out.println("Game number " + i + " ended.");
             System.out.println("-----------------------------------------------");
         }
-        System.out.println("All games have ended.");
+        System.out.print("All games have ended.");
     }
 
     public static int countX(char[][] board, int rows, int columns){
