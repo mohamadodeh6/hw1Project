@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
     //hello my friend this is a test for gitHub
+    //hello my friend this is a test for gitHub
+    //hello my friend this is a test for gitHub
     public static Scanner scanner;  // Note: Do not change this line.
 //*************//////////
     /**
@@ -43,13 +45,12 @@ public class Main {
     public static void theStudentsGame() {
         int[][][] semestersBox;
         char[][] prevBoard, currentBoard;
-        int semesterCount = 0, prevTakeen, currentTakeen = 1, maxSemesters = 100;
+        int  prevTakeen, currentTakeen = 1, maxSemesters = 100;
         System.out.println("Dear president, please enter the board’s size.");
         String input = scanner.nextLine();
         String[] dimensions = input.split(" X ");
         int rows = Integer.parseInt(dimensions[0]);
         int cols = Integer.parseInt(dimensions[1]);
-        semestersBox = new int[rows][cols][];
         prevBoard = new char[rows][cols];
         initBoard(prevBoard, rows, cols);
         currentBoard = new char[rows][cols];
@@ -86,7 +87,7 @@ public class Main {
     }
     //**********//
     public static int initBoardIndexes(char[][] board, int row_max, int col_max){
-        int rows = 0, cols = 0, i = 0;
+        int rows, cols, i = 0;
         while(true){
             System.out.println("Dear president, please enter the cell’s indexes.");
             String input = scanner.nextLine();
@@ -160,9 +161,7 @@ public class Main {
     }
     public static void switchBoard(char[][] prevBoard, char[][] currentBoard, int rows, int columns){
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                prevBoard[i][j] = currentBoard[i][j];
-            }
+            if (columns >= 0) System.arraycopy(currentBoard[i], 0, prevBoard[i], 0, columns);
         }
     }
 }
