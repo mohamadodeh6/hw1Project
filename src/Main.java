@@ -50,7 +50,7 @@ public class Main {
         int cols = Integer.parseInt(dimensions[1]);
         semestersBox = new int[maxSemesters][rows][cols];
         prevBoard = new char[rows][cols];
-        initBoard(prevBoard, rows, cols);
+       initBoard(prevBoard, rows, cols);
         currentBoard = new char[rows][cols];
         prevTakeen = initBoardIndexes(prevBoard, rows, cols);
         int i = 0;
