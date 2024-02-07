@@ -42,7 +42,7 @@ public class Main {
     public static void theStudentsGame() {
         int[][][] semestersBox;
         char[][] prevBoard, currentBoard;
-        int  prevTakeen, currentTakeen = 1, maxSemesters = 100;
+        int  prevTakeen, currentTakeen = -1, maxSemesters = 100;
         System.out.println("Dear president, please enter the board’s size.");
         String input = scanner.nextLine();
         String[] dimensions = input.split(" X ");
@@ -53,16 +53,12 @@ public class Main {
         initBoard(prevBoard, rows, cols);
         currentBoard = new char[rows][cols];
         prevTakeen = initBoardIndexes(prevBoard, rows, cols);
-        int i;
-        for (i = 0; i <= maxSemesters; i++) {
-            if (prevTakeen == currentTakeen){
-                System.out.println("The students have stabilized.");
-                break;
-            }
-            if (currentTakeen == 0){
-                System.out.println("There are no more students.");
-                break;
-            }
+        int i = 0;
+        do {
+//            if (prevTakeen == 0){
+//                System.out.println("There are no more students.");
+//                break;
+//            }
             if (i == maxSemesters){
                 System.out.println("The semesters limitation is over.");
                 break;
@@ -73,10 +69,25 @@ public class Main {
             saveGame(semestersBox, prevBoard, i, rows, cols);
             prevTakeen = countX(prevBoard, rows, cols);
             currentTakeen = countX(currentBoard, rows, cols);
+            if (prevTakeen == 0){
+                System.out.println("Number of students: " + prevTakeen);
+                System.out.println();
+                System.out.println("There are no more students.");
+                break;
+            }
+            if (sameBoards(prevBoard, currentBoard, rows, cols)){
+                System.out.println("Number of students: " + prevTakeen);
+                System.out.println();
+                System.out.println("The students have stabilized.");
+                break;
+            }
+
             switchBoard(prevBoard, currentBoard, rows,cols);
             System.out.println("Number of students: " + prevTakeen);
             System.out.println();
-        }
+            i++;
+        } while (i <= maxSemesters);
+
     }
     /* initiates the first board
     * */
@@ -92,16 +103,29 @@ public class Main {
     * */
     public static int initBoardIndexes(char[][] board, int row_max, int col_max){
         int rows, cols, i = 0;
+        boolean isPrint=true;
         while(true){
-            System.out.println("Dear president, please enter the cell’s indexes.");
+            if (isPrint){
+                System.out.println("Dear president, please enter the cell’s indexes.");
+
+            }
             String input = scanner.nextLine();
+
+            if (input.equals("Yokra")) {
+                // If the current token is "Yokra", consume it and break out of the loop
+//scanner.nextLine();
+                break;
+            }
             String[] dimensions = input.split(", ");
              rows = Integer.parseInt(dimensions[0]);
              cols = Integer.parseInt(dimensions[1]);
 
             if(rows < 0 || rows >= row_max || cols < 0 || cols >= col_max){
-                System.out.print("The cell is not within the board’s boundaries, enter a new cell.");
+                System.out.println("The cell is not within the board’s boundaries, enter a new cell.");
+                isPrint=false;
+                continue;
             }
+            isPrint=true;
             if (board[rows][cols] == '-'){
                 board[rows][cols] = 'X';
                 i++;
@@ -109,12 +133,13 @@ public class Main {
                 board[rows][cols] = '-';
                 i--;
             }
-            if (scanner.hasNext("Yokra")){
-                break;
-            }
+//            if (scanner.hasNext("Yokra")){
+//                scanner.nextLine();
+//                break;
+//            }
 
         }
-        System.out.println("Dear president, please enter the cell’s indexes.");
+//        System.out.println("Dear president, please enter the cell’s indexes.");
 
         return i;
         //*******//
@@ -187,4 +212,17 @@ public class Main {
             if (columns >= 0) System.arraycopy(currentBoard[i], 0, prevBoard[i], 0, columns);
         }
     }
+    public static boolean sameBoards(char[][] prevBoard, char[][] currBoard, int rows, int columns){
+        boolean same = true;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (prevBoard[i][j] != currBoard[i][j]){
+                    same = false;
+                }
+            }
+        }
+        return same;
+    }
+
 }
