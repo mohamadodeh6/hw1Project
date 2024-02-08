@@ -23,8 +23,14 @@ public class Main {
         }
         System.out.print("All games have ended.");
     }
-    /* returns the number of Takeen students
-    * */
+
+    /**
+     * countX method counts the number of Takeen students in a given board
+     * @param board - current game board
+     * @param rows - number of rows in the current board
+     * @param columns - number of columns in the current board
+     * @return - number of Takeen students on the current board
+     */
     public static int countX(char[][] board, int rows, int columns){
         int count = 0;
         for (int i = 0; i < rows; i++) {
@@ -36,8 +42,13 @@ public class Main {
         }
         return count;
     }
+
     /**
-     * Add your description
+     * theStudentsGame method is the driver function of the game
+     * it runs the current game when being called from the main method of the program
+     * this method handles the game flow by calling all the other methods that are responsible for checking
+     * the game rules and displaying the GUI to the player
+     * in other words, this method is the engine of the game
      */
     public static void theStudentsGame() {
         int[][][] semestersBox;
@@ -55,10 +66,6 @@ public class Main {
         prevTakeen = initBoardIndexes(prevBoard, rows, cols);
         int i = 0;
         do {
-//            if (prevTakeen == 0){
-//                System.out.println("There are no more students.");
-//                break;
-//            }
             if (i == maxSemesters){
                 System.out.println("The semesters limitation is over.");
                 break;
@@ -89,8 +96,13 @@ public class Main {
         } while (i <= maxSemesters);
 
     }
-    /* initiates the first board
-    * */
+
+    /**
+     * The method initiates the first board of the game by filling it with the character '-'
+     * @param board - empty board
+     * @param rows - the number of rows
+     * @param cols - the number of columns
+     */
     public static void initBoard(char[][] board, int rows, int cols){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -99,26 +111,31 @@ public class Main {
         }
     }
     //**********//
-    /* gets the Takeen indexes and fills the first board
-    * */
+
+    /**
+     * initBoardIndexes initiates the first board according to the indexes that the user enters
+     * indexes symbolize the Takeen students on the current board
+     * @param board - the board of the game
+     * @param row_max - maximum number of rows allowed int the board
+     * @param col_max - maximum number of columns allowed in the board
+     * @return - the initial number of Takeen students in the first board of the current game
+     */
     public static int initBoardIndexes(char[][] board, int row_max, int col_max){
         int rows, cols, i = 0;
         boolean isPrint=true;
         while(true){
             if (isPrint){
                 System.out.println("Dear president, please enter the cell’s indexes.");
-
             }
             String input = scanner.nextLine();
 
             if (input.equals("Yokra")) {
                 // If the current token is "Yokra", consume it and break out of the loop
-//scanner.nextLine();
                 break;
             }
             String[] dimensions = input.split(", ");
-             rows = Integer.parseInt(dimensions[0]);
-             cols = Integer.parseInt(dimensions[1]);
+            rows = Integer.parseInt(dimensions[0]);
+            cols = Integer.parseInt(dimensions[1]);
 
             if(rows < 0 || rows >= row_max || cols < 0 || cols >= col_max){
                 System.out.println("The cell is not within the board’s boundaries, enter a new cell.");
@@ -133,19 +150,18 @@ public class Main {
                 board[rows][cols] = '-';
                 i--;
             }
-//            if (scanner.hasNext("Yokra")){
-//                scanner.nextLine();
-//                break;
-//            }
-
         }
-//        System.out.println("Dear president, please enter the cell’s indexes.");
 
         return i;
         //*******//
     }
-    /* displays the current board
-    * */
+
+    /**
+     * The method prints the game board to the user
+     * @param board - the board of the game
+     * @param rows - number of rows
+     * @param columns - number of columns
+     */
     public static void printBoard(char[][] board, int rows, int columns){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -154,9 +170,15 @@ public class Main {
             System.out.println();
         }
     }
-    /* creates the next board based on the previous one
-    according to the Takeen method's conditions
-    * */
+
+    /**
+     * updateBoard method updates the current game board by changing the status of each student
+     * depending on the return value of Takeen function
+     * @param prevBoard - the game board of the previous semester
+     * @param currentBoard - the game board of the current semester
+     * @param rows - number of rows of the game board
+     * @param columns - number of columns of the game board
+     */
     public static void updateBoard(char[][] prevBoard, char[][] currentBoard, int rows, int columns){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -169,18 +191,32 @@ public class Main {
         }
 
     }
-    /* saves the history of boards during the whole game
-    * */
+
+    /**
+     * saveGame method handles the task of saving history of the game board in each semester
+     * @param semBox - multi-dimension array that stores the history of the students board for each semester
+     * @param board - game board
+     * @param semNumber - the number of the current semester
+     * @param rows - number of boards' rows
+     * @param cols - number of boards' columns
+     */
     public static void saveGame(int[][][] semBox, char[][] board, int semNumber, int rows, int cols){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                 semBox[semNumber][i][j] = board[i][j];
+                semBox[semNumber][i][j] = board[i][j];
             }
         }
     }
-    /* returns whether the student remains Takeen
-    according to the game rules
-    * */
+
+    /**
+     * Takeen function checks whether the student at a given index remains Takeen or not
+     * @param board - the board of the game
+     * @param maxRows - maximum number of rows allowed
+     * @param maxCols - maximum number of columns allowed
+     * @param row - a specific row index in the board
+     * @param col - a specific column index int the board
+     * @return - true if the student at the specified index remains Takeen, false otherwise
+     */
     public static boolean Takeen(char[][] board, int maxRows, int maxCols, int row, int col){
         boolean takeen = false;
         int startRow = Math.max(0, row - 1);
@@ -205,13 +241,28 @@ public class Main {
         }
         return takeen;
     }
-    /* copies the current board to the previous one
-    * */
+
+    /**
+     * switchBoard function copies the !!!!!!!!!!!!!!!! Complete this please !!!!!!!!!!!!!!!
+     * @param prevBoard - the board of the previous semester
+     * @param currentBoard - the board of the current semester
+     * @param rows - number of rows of the current board
+     * @param columns - number of columns of the current board
+     */
     public static void switchBoard(char[][] prevBoard, char[][] currentBoard, int rows, int columns){
         for (int i = 0; i < rows; i++) {
             if (columns >= 0) System.arraycopy(currentBoard[i], 0, prevBoard[i], 0, columns);
         }
     }
+
+    /**
+     * sameBoards method compares the current game board with the previous one
+     * @param prevBoard - the board of the previous game
+     * @param currBoard - the board of the current game
+     * @param rows - number of rows
+     * @param columns - number of columns
+     * @return - true if the current board and the previous board are identical, false otherwise
+     */
     public static boolean sameBoards(char[][] prevBoard, char[][] currBoard, int rows, int columns){
         boolean same = true;
 
