@@ -61,7 +61,7 @@ public class Main {
         int cols = Integer.parseInt(dimensions[1]);
         semestersBox = new int[maxSemesters][rows][cols];
         prevBoard = new char[rows][cols];
-       initBoard(prevBoard, rows, cols);
+        initBoard(prevBoard, rows, cols);
         currentBoard = new char[rows][cols];
         prevTakeen = initBoardIndexes(prevBoard, rows, cols);
         int i = 0;
@@ -110,8 +110,6 @@ public class Main {
             }
         }
     }
-    //**********//
-
     /**
      * initBoardIndexes initiates the first board according to the indexes that the user enters
      * indexes symbolize the Takeen students on the current board
@@ -130,7 +128,6 @@ public class Main {
             String input = scanner.nextLine();
 
             if (input.equals("Yokra")) {
-                // If the current token is "Yokra", consume it and break out of the loop
                 break;
             }
             String[] dimensions = input.split(", ");
@@ -153,7 +150,6 @@ public class Main {
         }
 
         return i;
-        //*******//
     }
 
     /**
@@ -243,7 +239,7 @@ public class Main {
     }
 
     /**
-     * switchBoard function copies the !!!!!!!!!!!!!!!! Complete this please !!!!!!!!!!!!!!!
+     * switchBoard function transfers the current board to the previous one as part of the games implementation logic
      * @param prevBoard - the board of the previous semester
      * @param currentBoard - the board of the current semester
      * @param rows - number of rows of the current board
@@ -268,8 +264,9 @@ public class Main {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                if (prevBoard[i][j] != currBoard[i][j]){
+                if (prevBoard[i][j] != currBoard[i][j]) {
                     same = false;
+                    break;
                 }
             }
         }
